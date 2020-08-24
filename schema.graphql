@@ -1,0 +1,22 @@
+type Query {
+  publicArticles: [Article!]!
+  draftArticles: [Article!]!
+  article(uid: String!): Article
+}
+
+type Article {
+  uid: String!
+  title: String!
+  markdown: String!
+  html: String!
+  draft: Boolean!
+  last_modified_at: Int!
+  prev: Article
+  next: Article
+}
+
+type Mutation {
+  createArticle(title: String!, markdown: String!, html: String!, draft: Boolean!): Article!
+  updateArticle(uid: String!, title: String!, markdown: String!, html: String!, draft: Boolean!): Article!
+  deleteArticle(uid: String!): Article!
+}
