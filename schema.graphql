@@ -2,6 +2,7 @@ type Query {
   publicArticles: [Article!]!
   draftArticles: [Article!]!
   article(uid: String!): Article
+  latestArticle: Article
 }
 
 type Article {
@@ -10,7 +11,8 @@ type Article {
   markdown: String!
   html: String!
   draft: Boolean!
-  last_modified_at: Int!
+  created_at: Int!
+  modified_at: Int!
   prev: Article
   next: Article
 }
