@@ -1,24 +1,33 @@
 type Query {
-  publicArticles: [Article!]!
-  draftArticles: [Article!]!
-  article(uid: String!): Article
-  latestArticle: Article
+  publicArticles(top_uid: String): [ArticleSchema!]!
+  draftArticles(top_uid: String): [ArticleSchema!]!
+  article(uid: String!): ArticleSchema
+}
+
+type ArticleSchema {
+  uid: String!
+  article: Article!
+  created_at: Int!
+  modified_at: Int!
+  next: ArticleSchema
+  prev: ArticleSchema
 }
 
 type Article {
-  uid: String!
   title: String!
   markdown: String!
-  html: String!
   draft: Boolean!
-  created_at: Int!
-  modified_at: Int!
-  prev: Article
-  next: Article
 }
 
 type Mutation {
-  createArticle(title: String!, markdown: String!, html: String!, draft: Boolean!): Article!
-  updateArticle(uid: String!, title: String!, markdown: String!, html: String!, draft: Boolean!): Article!
-  deleteArticle(uid: String!): Article!
+  uploadArticle(data: ArticleMutation!): ArticleSchema!
+  deleteArticle(uid: String!): ArticleSchema!
+}
+
+input ArticleMutation {
+  uid: String
+  title: String!
+  markdown: String!
+  draft: Boolean!
+  html: String!
 }
