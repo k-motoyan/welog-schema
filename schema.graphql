@@ -7,6 +7,7 @@ type Query {
 type ArticleSchema {
   uid: String!
   article: Article!
+  html: String!
   created_at: Int!
   modified_at: Int!
   next: ArticleSchema
